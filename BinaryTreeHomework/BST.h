@@ -38,7 +38,7 @@ class BST : public BinaryTreeType<T>
 public:
     void insert(const T& item);
     void deleteNode(const T& item);
-    bool search(const T& item) { return false; }
+    bool search(const T& item);
 private:
     void deleteFromTree(nodeType<T> * &p);
 };
@@ -51,37 +51,53 @@ void BST<T>::deleteNode(const T& item)
     bool found = false;
 
     if (root == nullptr)
-        cout << "Nothing to delete" << endl;
-    else
+        return;
+    curr = root;
+    trail = curr;
+    while (curr != nullptr && !found)
     {
-        curr = root;
-        trail = curr;
-        while (curr != nullptr && !found)
-        {
-            if (curr->info == item)
-                found = true;
-            else
-            {
-                trail = curr;
-                if (curr->info > item)
-                    curr = curr->lLink;
-                else
-                    curr = curr->rLink;
-            }
-        }
-
-        if (found)
-        {
-            if (curr == root)
-                deleteFromTree(root);
-            else if (trail->info > item)
-                deleteFromTree(trail->lLink);
-            else
-                deleteFromTree(trail->rLink);
-        }
+        if (curr->info == item)
+            found = true;
         else
-            cout << "Item is not found" << endl;
+        {
+            trail = curr;
+            if (curr->info > item)
+                curr = curr->lLink;
+            else
+                curr = curr->rLink;
+        }
     }
+    if (found)
+    {
+        if (curr == root)
+            deleteFromTree(root);
+        else if (trail->info > item)
+            deleteFromTree(trail->lLink);
+        else
+            deleteFromTree(trail->rLink);
+    }
+}
+
+template<typename T>
+bool BST<T>::search(const T & item)
+{
+    nodeType<T> *curr = root;
+    if (root == nullptr)
+        return;
+    curr = root;
+    while (curr != nullptr)
+    {
+        if (curr->info == item)
+            return true;
+        else
+        {
+            if (curr->info > item)
+                curr = curr->lLink;
+            else
+                curr = curr->rLink;
+        }
+    }
+    return false;
 }
 
 template <typename T>
@@ -92,7 +108,7 @@ void BST<T>::deleteFromTree(nodeType<T> * &p)
     nodeType<T> *temp;
 
     if (p == nullptr)
-        cout << "Nothing to delete" << endl;
+        return;
 
     // if both children are null
     else if (p->lLink == nullptr && p->rLink == nullptr)
@@ -118,7 +134,7 @@ void BST<T>::deleteFromTree(nodeType<T> * &p)
         delete temp;
     }
 
-    // if neither child is null
+    // if neither child is null, fswap with maximum value in left subtree
     else
     {
         curr = p->lLink;
