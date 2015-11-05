@@ -22,25 +22,23 @@ void main()
 
     while (!workingText.empty())
     {
-         int spaceLoc = 0;
+        int spaceLoc = 0;
 
-         // erase any leading spaces
-         workingText.erase(0, workingText.find_first_not_of(' '));
+        // erase any leading spaces
+        workingText.erase(0, workingText.find_first_not_of(' '));
 
-         spaceLoc = workingText.find_first_of(' ');
-         // insert the word token into the tree
-         wordTokenTree.insert(workingText.substr(0, spaceLoc));
+        spaceLoc = workingText.find_first_of(' ');
+        // insert the word token into the tree
+        wordTokenTree.insert(workingText.substr(0, spaceLoc));
 
-         // Remove the word token from the string
-         workingText.erase(0, spaceLoc);
-     }
+        // Remove the word token from the string
+        workingText.erase(0, spaceLoc);
+    }
 
-     wordTokenTree.inOrderTraversal();
-     cout << endl << endl;
-     wordTokenTree.postOrderTraversal();
-     cout << endl << endl;
-     wordTokenTree.preOrderTraversal();
-     cout << endl << endl;
+    wordTokenTree.inOrderTraversal();
+    cout << endl << endl;
+    wordTokenTree.postOrderTraversal();
+    cout << endl << endl;
 
     system("pause");
 
@@ -57,5 +55,3 @@ void removePunctuation(string& text)
             sit++;
     }
 }
-
-// I like, big; butts663##^^^#3?? and>< I cannot LI)(!E:::
