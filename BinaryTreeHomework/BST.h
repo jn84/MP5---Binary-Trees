@@ -1,3 +1,11 @@
+//////////////////////////////////////////////////////////////////////////
+//       Name: Jeremy Nims
+// Assignment: Binary Trees Homework #10
+//      Class: CPS 272, Wed 5:30
+//    Comment: Unused functions are omitted from the BST class for
+//             less printing.
+//////////////////////////////////////////////////////////////////////////
+
 #pragma once
 #include <iostream>
 using namespace std;
@@ -18,7 +26,6 @@ protected:
 public:
     BinaryTreeType();
     ~BinaryTreeType();
-    bool isEmpty() const;
     virtual void insert(const T& item) = 0;
     void inOrderTraversal() const;
     void postOrderTraversal() const;
@@ -75,12 +82,6 @@ template <typename T>
 BinaryTreeType<T>::~BinaryTreeType()
 {
     destroy(root);
-}
-
-template<typename T>
-bool BinaryTreeType<T>::isEmpty() const
-{
-    return root == nullptr;
 }
 
 template <typename T>
